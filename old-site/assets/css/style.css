@@ -1,0 +1,185 @@
+/*
+ * Template Name: IISPD - Responsive Bootstrap Template
+ * Description: Business, Corporate, Portfolio, E-commerce, Blog and One Page Template.
+ * Version: 1.9.2 
+ * Author: @
+ * Website: http://iispd.org
+*/
+
+/*Import Global Compulsory CSS Files*/
+@import url(blocks.css);
+@import url(app.css);
+@import url(dark.css);
+/*Import CSS Plugins*/
+@import url(style-switcher.css);
+
+.testimonials-wrap a {
+    text-decoration: none !important;
+}
+
+.btn-bg1 {
+    background-color: #143990;
+    color: #fff;
+}
+
+    .btn-bg1:hover, .btn-bg1:focus {
+        background-color: #143990;
+        color: #fff;
+    }
+
+.btn-bg2 {
+    background-color: #bf360c;
+    color: #fff;
+}
+
+    .btn-bg2:hover, .btn-bg2:focus {
+        background-color: #bf360c;
+        color: #fff;
+    }
+
+.border-top-row {
+    border-top: solid 2px #f15a29;
+}
+
+form textarea {
+    resize: none;
+}
+
+.footer-btn-section input {
+    margin: 0 10px;
+}
+
+
+.login-screen-forget label {
+    padding: 30px;
+}
+
+.robot-check {
+    margin-top: 30px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+
+* {
+    border-radius: 0;
+}
+
+
+.certification-title-text p {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.caption p {
+    padding: 5px;
+    padding-bottom: 5px;
+}
+
+
+
+body {
+    color: #333;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+    body.header-fixed-space {
+        padding-top: 94px;
+    }
+
+    body.header-fixed-space-v2 {
+        padding-top: 135px;
+    }
+
+@media (max-width: 991px) {
+    body.header-fixed-space,
+    body.header-fixed-space-v2 {
+        padding-top: 0;
+    }
+}
+
+p,
+li,
+li a,
+label {
+    color: #555;
+}
+
+a {
+    color: #f15a29;
+    text-decoration: none;
+}
+
+    a,
+    a:focus,
+    a:hover,
+    a:active,
+    button,
+    button:hover {
+        outline: 0 !important;
+    }
+
+        a:focus {
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #0fd2ea;
+            text-decoration: underline;
+        }
+
+/*Boxed Layout
+------------------------------------*/
+.wrapper {
+    background: #fff;
+}
+
+.boxed-layout {
+    padding: 0;
+    box-shadow: 0 0 5px #ccc;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    background: url(../img/patterns/15.png) repeat;
+}
+
+/*Hiding arrows for select field in IE*/
+select::-ms-expand {
+    display: none;
+}
+
+
+
+.modal-text-content p {
+    font-size: 1.2em;
+}
+
+
+.modal-footer {
+    border-top: none !important;
+}
+
+
+.carousel-inner img {
+    width: 100%;
+}
+
+
+
+
+
+/*=====prototype=====*/
+
+.fcpcontact-quik-section a {
+    color: #555 !important;
+    text-decoration: underline;
+    line-height: 35px;
+}
+
+.fcpcontact-quik-section {
+    border: 1px solid #8ce;
+}
+
+/*=====prototype=====*/
+
+
+==================================

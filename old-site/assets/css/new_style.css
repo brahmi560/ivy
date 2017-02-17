@@ -1,0 +1,11 @@
+.marquee-row{
+	width:100%;
+	height:45px;
+	background-color:#3187bf;
+}
+.marquee-row p{
+	color:#fff ;
+	font-size:1.2em;
+	letter-spacing:1px;
+	margin:10px 0;
+}

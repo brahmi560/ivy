@@ -1,0 +1,266 @@
+﻿<%@ master language="C#" autoeventwireup="true" inherits="webmaster, App_Web_q422mjoc" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>.: IVY Global Academy :.</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- CSS Header and Footer -->
+    <link rel="stylesheet" href="assets/css/header-default.css">
+    <link rel="stylesheet" href="assets/css/footer-v1.css">
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/line-icons.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/parallax-slider.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="wrapper border-top-row">
+                <!--=== Header ===-->
+                <div class="header">
+                    <div class="container">
+                        <!-- Logo -->
+                        <a class="logo" href="index.aspx">
+                            <img src="assets/img/logo.png" alt="ivyga" title="ivyga" />
+                        </a>
+                        <!-- End Logo -->
+                        <!-- Topbar -->
+                        <div class="topbar">
+                            <ul class="loginbar pull-right">
+                                <li><a href="verify.aspx">Verify Certification</a></li>
+                                <li class="topbar-devider"></li>
+                                <li><a href="faqs.aspx">Faq's</a></li>
+                                <li class="topbar-devider"></li>
+                                <li><a href="login.aspx">Login</a></li>
+                            </ul>
+                        </div>
+                        <!-- End Topbar -->
+                        <!-- Toggle get grouped for better mobile display -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="fa fa-bars"></span>
+                        </button>
+                        <!-- End Toggle -->
+                    </div>
+                    <!--/end container-->
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+                        <div class="container">
+                            <ul class="nav navbar-nav">
+                                <!-- Home -->
+                                <li><a href="index.aspx" class="active">Home</a></li>
+                                <li><a href="about.aspx">About Us</a></li>
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Certifications</a>
+                                    <ul role="menu" class="dropdown-menu">
+                                        <li><a href="benefits.aspx">Benefits of Certification</a></li>
+                                        <li><a href="certifications.aspx">Certifications Offered</a></li>
+                                    </ul>
+                                </li>
+                                <li class=""><a href="partners.aspx">Partners</a></li>
+                                <li class="dropdown">
+                                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">Registration</a>
+                                    <ul role="menu" class="dropdown-menu">
+                                        <li class=""><a href="learner.aspx">Learner</a></li>
+                                        <li><a href="trainer.aspx">Knowledge Partner (Trainer)</a></li>
+                                        <li><a href="independent.aspx">Independent Partner</a></li>
+                                        <li><a href="enterprise.aspx">Enterprise Partner</a></li>
+                                        <li class=""><a href="endorsor.aspx">Endorsor</a></li>
+                                    </ul>
+                                </li>
+                                <li class=""><a href="bok.aspx">BOK</a></li>
+                                <!--<li class="mega-menu-fullwidth"><a href="#"> Blog</a></li> -->
+                                <li class="mega-menu-fullwidth"><a href="contact.aspx">Contact</a></li>
+                            </ul>
+                        </div>
+                        <!--/end container-->
+                    </div>
+                    <!--/navbar-collapse-->
+                </div>
+                <!--=== End Header ===-->
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+                <div class="container content">
+                    <!-- Owl Clients v1 -->
+                    <div class="headline">
+                        <h2>Knowledge Partners</h2>
+                    </div>
+                    <div class="owl-clients-v1">
+                        <div class="item">
+                            <img src="assets/img/coepd.png" alt="coepd" title="coepd"/>
+                        </div>
+                        <div class="item">
+                            <img src="assets/img/aptit.png" alt="aptit" title="aptit" />
+                        </div>
+                        <div class="item">
+                            <img src="assets/img/4cLearn.png" alt="4cLearn" title="4cLearn" />
+                        </div>
+                       <div class="item">
+                            <img src="assets/img/satyamedha.png" alt="Satya Medha" title="Satya Medha" />
+                        </div>
+                    </div>
+                    <!-- End Owl Clients v1 -->
+                </div>
+                <!--/container-->
+                <!-- End Content Part -->
+                <!--=== Footer Version 1 ===-->
+                <div class="footer-v1">
+                    <div class="footer">
+                        <div class="container">
+                            <div class="row">
+                                <!-- About -->
+                                <!--/col-md-3-->
+                                <!-- End About -->
+                                <!-- Latest -->
+                                <div class="col-md-3 md-margin-bottom-40">
+                                    <div class="posts">
+                                        <div class="headline">
+                                            <h2>Links</h2>
+                                        </div>
+                                        <ul class="list-unstyled latest-list">
+                                            <li><a href="index.aspx">Home</a></li>
+                                            <li><a href="about.aspx">About Us</a></li>
+                                            <li><a href="benefits.aspx">Benefits of Certification</a></li>
+                                            <li><a href="bok.aspx">Body of Knowledge (BOK)</a></li>
+                                            <li><a href="faqs.aspx">Faq's</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--/col-md-3-->
+                                <!-- End Latest -->
+                                <!-- Link List -->
+                                <div class="col-md-3 md-margin-bottom-40">
+                                    <div class="headline">
+                                        <h2>Certifications</h2>
+                                    </div>
+                                    <ul class="list-unstyled latest-list">
+                                        <li><a href="citbap.aspx">IT Business Analyst - Practitioner</a></li>
+                                        <li><a href="citba.aspx">IT Business Analyst</a></li>
+                                        <li><a href="citsm.aspx">IT Scrum Master </a></li>
+                                        <li><a href="citpo.aspx">IT Product Owner</a></li>
+                                        <li><a href="citsd.aspx">IT Scrum Developer </a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3 md-margin-bottom-40">
+                                    <div class="headline">
+                                        <h2>Registration</h2>
+                                    </div>
+                                    <ul class="list-unstyled latest-list">
+                                        <li><a href="learner.aspx">Learner</a></li>
+                                        <li><a href="endorsor.aspx">Endorsor</a></li>
+                                        <li><a href="trainer.aspx">Knowledge Partner (Trainer)</a></li>
+                                        <li><a href="independent.aspx">Independent Partner</a></li>
+                                        <li><a href="enterprise.aspx">Enterprise Partner</a></li>
+                                    </ul>
+                                </div>
+                                <!--/col-md-3-->
+                                <!-- End Address -->
+                                <div class="col-md-3 md-margin-bottom-40">
+                                    <div class="posts">
+                                        <div class="headline">
+                                            <h2>Follow Up</h2>
+                                        </div>
+                                        <ul class="list-inline dark-social-v2 ">
+                                            <li>
+                                                <a href="#" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook">
+                                                    <i class="fa fa-facebook fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter">
+                                                    <i class="fa fa-twitter fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin">
+                                                    <i class="fa fa-linkedin fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus">
+                                                    <i class="fa fa-google-plus fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pinterest">
+                                                    <i class="fa fa-pinterest fa-fixed fa-2x"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#" target="_blank" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Youtube">
+                                                    <i class="fa fa-youtube fa-2x"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/footer-->
+                    <div class="copyright">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        Copyright &copy; 2016 - IVY Global Academy. All rights reserved
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="pull-right">
+                                        <a href="privacypolicy.aspx">Privacy Policy</a> | <a href="termsofservice.aspx">Terms of Service</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/copyright-->
+                </div>
+                <!--=== End Footer Version 1 ===-->
+            </div>
+            <!--/wrapper-->
+            <!-- JS Global Compulsory -->
+            <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+            <script type="text/javascript" src="assets/js/jquery-migrate.min.js"></script>
+            <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+            <!-- JS Implementing Plugins -->
+            <script type="text/javascript" src="assets/js/back-to-top.js"></script>
+            <script type="text/javascript" src="assets/js/smoothScroll.js"></script>
+            <script type="text/javascript" src="assets/js/modernizr.js"></script>
+            <script type="text/javascript" src="assets/js/jquery.cslider.js"></script>
+            <script type="text/javascript" src="assets/js/about-plugins/waypoints.min.js"></script>
+            <script type="text/javascript" src="assets/js/about-plugins/jquery.counterup.min.js"></script>
+            <script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+            <!-- JS Customization -->
+            <script type="text/javascript" src="assets/js/custom.js"></script>
+            <!-- JS Page Level -->
+            <script type="text/javascript" src="assets/js/app.js"></script>
+            <script type="text/javascript" src="assets/js/owl-carousel-1.js"></script>
+            <script type="text/javascript" src="assets/js/style-switcher.js"></script>
+            <script type="text/javascript" src="assets/js/parallax-slider.js"></script>
+            <script type="text/javascript">
+                jQuery(document).ready(function ($) {
+                    App.init();
+                    App.initCounter();
+                    App.initParallaxBg();
+                    OwlCarousel.initOwlCarousel();
+                    StyleSwitcher.initStyleSwitcher();
+                    //ProgressBar.initProgressBarVertical();
+                    ParallaxSlider.initParallaxSlider();
+                });
+            </script>
+        </div>
+    </form>
+</body>
+</html>
