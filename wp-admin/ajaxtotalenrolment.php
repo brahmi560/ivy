@@ -46,7 +46,7 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 									$user_last = get_user_meta($totalenrol->ID);
 									?>
 								<tr>
-									<td><?php echo $sno.date('Y-m-d',strtotime($mindate));?></td>
+									<td><?php echo $sno;?></td>
 									<td><?php echo $user_last['first_name'][0].' '.$user_last['last_name'][0];?> Smith</td>
 									<td>A<?php echo str_pad($totalenrol->ID, 5, '0', STR_PAD_LEFT); ?> </td>
 									<td><?php echo $totalenrol->post_title;?></td>
