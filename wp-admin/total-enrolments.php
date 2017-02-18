@@ -140,6 +140,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
             });
 			
 			$('#finalfilter').on('click',function(){
+				$('#dynamiccontentenrol').html('');
 			var mindatenew = $( ".input-mini" ).first().val();
 			var maxdatenew = $( ".input-mini" ).last().val();
 			//console.log(maxdatenew);
