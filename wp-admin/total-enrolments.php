@@ -19,6 +19,20 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     <link href="css\style.css" rel="stylesheet">
 
 	<link href="css\plugins\daterangepicker\daterangepicker-bs3.css" rel="stylesheet">
+	
+	<style>
+	#ajaxloaderid
+	{
+	  display:none;
+	  width:20%;
+	}
+	#ajxprogress
+	{
+	float: left;
+    width: 100%;
+    background: #fff;
+	}
+	</style>
 </head>
 <body style="background-color: #f3f3f4 !important;">
 <div class="wrap">
@@ -55,6 +69,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 						
 
 					</div>
+					<div id="ajxprogress"><img src="images/ajaxprogress.gif" id="ajaxloaderid" /></div>
 				</div>
 			</div>
 			
@@ -133,10 +148,14 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 			  $.ajax({
 				  method: "GET",
 				  url: "ajaxtotalenrolment.php",
+				  beforeSend: function()
+				  {$("#ajaxloaderid").css("display", "block");
+				  },
 				  data: { mindatenew: mindatenew, maxdatenew: maxdatenew },
 				  dataType: "html",
 			    success: function(data) {
 				    $('#dynamiccontentenrol').html(data)
+				    $("#ajaxloaderid").css("display", "none");
 			      console.log(data);
 			    }
 			  });
