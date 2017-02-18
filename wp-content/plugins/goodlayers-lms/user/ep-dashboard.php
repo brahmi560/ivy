@@ -18,6 +18,7 @@ h3 span{
 	</div>	
 	<div class="gdlr-lms-profile-info">
 		<span class="gdlr-lms-head" style="text-align: right; padding-right: 15px;"><?php echo __('Registration Date:', 'gdlr-lms'); ?></span>
+		<span class="gdlr-lms-tail"><?php echo gdlr_lms_get_user_info($user_id, 'user_registered'); ?></span>
 	</div>
 	<div class="gdlr-lms-profile-info">
 		<span class="gdlr-lms-head" style="text-align: right; padding-right: 15px;"><?php echo __('First Name:', 'gdlr-lms'); ?></span>

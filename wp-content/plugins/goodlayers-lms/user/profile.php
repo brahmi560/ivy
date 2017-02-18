@@ -44,14 +44,14 @@
 		<input type="text" name="phone" id="phone" value="<?php echo esc_attr(gdlr_lms_get_user_info($user_id, 'phone')); ?>" />
 	</p>-->
 	<div class="clear"></div>
-	<p class="gdlr-lms-half-left">
+	<!--<p class="gdlr-lms-half-left">
 		<label for="name-on-certificate"><?php _e('Name to be displayed on Certificate: *', 'gdlr-lms'); ?></label>
 		<input type="text" name="name-on-certificate" id="name-on-certificate" value="<?php echo esc_attr(gdlr_lms_get_user_info($user_id, '')); ?>" />
 	</p>	
 	<p class="gdlr-lms-half-right">
 		<label for="confirm-name-on-certificate"><?php _e('Confirm Name to be displayed on Certificate: *', 'gdlr-lms'); ?></label>
 		<input type="text" name="confirm-name-on-certificate" id="confirm-name-on-certificate" value="<?php echo esc_attr(gdlr_lms_get_user_info($user_id, '')); ?>" />
-	</p>
+	</p>-->
 	<div class="clear"></div>
 	<p class="gdlr-lms-half-left">
 		<label>Upload Your Resume(Optional):</label>

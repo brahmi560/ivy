@@ -1,4 +1,4 @@
-<h3 class="gdlr-lms-admin-head" ><?php _e('View Test scores (only online course)', 'gdlr-lms'); ?></h3>
+<h3 class="gdlr-lms-admin-head" ><?php _e('View Test scores', 'gdlr-lms'); ?></h3>
 <table class="gdlr-lms-table">
 <tr>
 	<th><?php _e('Certification', 'gdlr-lms'); ?></th>

@@ -113,11 +113,11 @@
 					</p>
 					<div class="clear"></div>
 					<p class="gdlr-lms-half-left">
-						<label><?php _e('First Name *', 'gdlr-lms'); ?></label>
+						<label><?php _e('First Name to be displayed on Certificate *', 'gdlr-lms'); ?></label>
 						<input type="text" name="first_name" value="<?php echo isset($_POST['first_name'])? $_POST['first_name']: ''; ?>" />
 					</p>
 					<p class="gdlr-lms-half-right">
-						 <label><?php _e('Last Name *', 'gdlr-lms'); ?></label>
+						 <label><?php _e('Last Name to be displayed on Certificate *', 'gdlr-lms'); ?></label>
 						 <input type="text" name="last_name" value="<?php echo isset($_POST['last_name'])? $_POST['last_name']: ''; ?>" />
 					</p>
 					<div class="clear"></div>		
