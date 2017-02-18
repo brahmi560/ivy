@@ -19,6 +19,20 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     <link href="css\style.css" rel="stylesheet">
 
 	<link href="css\plugins\daterangepicker\daterangepicker-bs3.css" rel="stylesheet">
+		<style>
+	#ajaxloaderid
+	{
+	  display:none;
+	  width:20%;
+	}
+	#ajxprogress
+	{
+	float: left;
+    width: 100%;
+    background: #fff;
+	}
+	</style>
+	
 </head>
 <body style="background-color: #f3f3f4 !important;">
 <div class="wrap">
@@ -31,18 +45,23 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
                             <h5>Certification Wise Enrollments</h5>
                         </div>
                         <div class="ibox-content">
+                        <?php 
+                        global $wpdb;
+                        $allcertificates = $wpdb->get_results( 'SELECT ID,post_title FROM  wp_488a9xj6dq_posts WHERE post_type="course" AND post_status="publish"  ORDER BY post_title ASC', OBJECT );
+                        ?>
 							<form method="get" class="form-horizontal">
                                 <div class="form-group"><label class="col-sm-2 control-label">Select Certification</label>
 									<!--Add categories in future-->
                                     <div class="col-sm-10 col-lg-6 col-md-6">
+                                    <?php if(!empty($allcertificates)){?>
 										<select id="course-name-opt" class="form-control m-b" name="account">
-											<option disabled selected>Select</option>
-											<option>IT Business Analyst - Practitioner</option>
-											<option>IT Business Analyst</option>
-											<option>IT Scrum Master</option>
-											<option>IT Product Owner</option>
-											<option>IT Scrum Developer</option>
+											<option value="0">Select</option>
+											<?php foreach ($allcertificates as $certificate){?>
+											<option value="<?php echo $certificate->ID; ?>"><?php echo $certificate->post_title; ?></option>
+											<?php }?>
+											
 										</select>
+										<?php } ?>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -52,7 +71,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 									<i class="fa fa-calendar"></i>
 									<span></span> <b class="caret"></b>
 								</div>
-								<button onclick="document.getElementById('det-tot-enr').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"><strong>Submit</strong></button>
+								<button onclick="document.getElementById('det-tot-enr').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"   id="finalfilter"><strong>Submit</strong></button>
 								<button onclick="document.getElementById('det-tot-enr').style.display='none'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px; margin-left: 10px;" type="button"><strong>Cancel</strong></button>
 							</div>
                         </div>
@@ -63,62 +82,14 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 						<div class="ibox-title">
 							<h5><span></span> Enrollments</h5>
 						</div>
-						<div class="ibox-content">
-							<div class="table-responsive">
-								<table class="table table-striped">
-									<thead>
-									<tr>
-										<th>#</th>
-										<th>Name </th>
-										<th>User ID </th>
-										<th>Course Name </th>
-										<th>Phone </th>
-										<th>Email ID </th>
-										<th>Date</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr>
-										<td>1</td>
-										<td>Patrick Smith</td>
-										<td>A00001</td>
-										<td>IT Business Analyst - Practitioner</td>
-										<td>0800 051213</td>
-										<td>patrick@gmail.com</td>
-										<td>Jan 14, 2016</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Alice Jackson</td>
-										<td>A00002</td>
-										<td>IT Business Analyst</td>
-										<td>0500 780909</td>
-										<td>alice@gmail.com</td>
-										<td>Jan 16, 2016</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>John Smith</td>
-										<td>A00003</td>
-										<td>IT Scrum Developer</td>
-										<td>0800 1111</td>
-										<td>smith@gmail.com</td>
-										<td>Jan 18, 2016</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Anna Jordan</td>
-										<td>A00004</td>
-										<td>IT Business Analyst</td>
-										<td>(016977) 0648</td>
-										<td>anna@gmail.com</td>
-										<td>Jan 22, 2016</td>
-									</tr>
-									</tbody>
-								</table>
-							</div>
+						<div class="ibox-content"  id="dynamiccontentenrol">
+							
 
 						</div>
+						
+											
+					<div id="ajxprogress"><img src="images/ajaxprogress.gif" id="ajaxloaderid" /></div>
+						
 					</div>
 				</div>
 			</div>
@@ -187,12 +158,48 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             });
 
-			$(function(){
+			/* $(function(){
 				$("#det-tot-enr h5 span").html($("#course-name-opt").val());
 				$("#course-name-opt").change(function() {
 					$("#det-tot-enr h5 span").html($(this).val());
 				});
+			}); */
+
+
+
+			
+			$('#finalfilter').on('click',function(){
+				$('#dynamiccontentenrol').html('');
+			var mindatenew = $( ".input-mini" ).first().val();
+			var maxdatenew = $( ".input-mini" ).last().val();
+			var selectedcertificate =  $("#course-name-opt").val();
+			//console.log(selectedcertificate);
+
+              if(selectedcertificate != 0){
+			  $.ajax({
+				  method: "GET",
+				  url: "ajaxcertificationwiseenrolment.php",
+				  beforeSend: function()
+				  {$("#ajaxloaderid").css("display", "block");
+				  },
+				  data: { mindatenew: mindatenew, maxdatenew: maxdatenew,selectedcertificate: selectedcertificate },
+				  dataType: "html",
+			    success: function(data) {
+				    $('#dynamiccontentenrol').html(data)
+				    $("#ajaxloaderid").css("display", "none");
+			      console.log(data);
+			    }
+			  });
+              }
+              else
+              {
+                  alert('Please select certificate.');
+              }
+			  
 			});
+            
+
+			
 
 		});
 
