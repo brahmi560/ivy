@@ -19,6 +19,20 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     <link href="css\style.css" rel="stylesheet">
 	
 	<link href="css\plugins\daterangepicker\daterangepicker-bs3.css" rel="stylesheet">
+		<style>
+	#ajaxloaderid
+	{
+	  display:none;
+	  width:20%;
+	}
+	#ajxprogress
+	{
+	float: left;
+    width: 100%;
+    background: #fff;
+	}
+	</style>
+	
 </head>
 <body style="background-color: #f3f3f4 !important;">
 <div class="wrap">
@@ -36,7 +50,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								<i class="fa fa-calendar"></i>
 								<span></span> <b class="caret"></b>
 							</div>
-							<button onclick="document.getElementById('det-tot-enr').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"><strong>Submit</strong></button>
+							<button onclick="document.getElementById('det-tot-enr').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"   id="finalfilter"><strong>Submit</strong></button>
 							<button onclick="document.getElementById('det-tot-enr').style.display='none'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px; margin-left: 10px;" type="button"><strong>Cancel</strong></button>
 						</div>
 					</div>
@@ -47,66 +61,14 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					<div class="ibox-title">
 						<h5>Detailed Date Span Revenue</h5>
 					</div>
-					<div class="ibox-content">
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-								<tr>
-									<th>#</th>
-									<th>Certification </th>
-									<th>Amount for each </th>
-									<th>Count </th>
-									<th>Total Amount </th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>1</td>
-									<td>IT Business Analyst - Practitioner</td>
-									<td>1000</td>
-									<td>1</td>
-									<td>1000</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>IT Business Analyst</td>
-									<td>800</td>
-									<td>1</td>
-									<td>800</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>IT Scrum Master</td>
-									<td>1200</td>
-									<td>1</td>
-									<td>1200</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>IT Product Owner</td>
-									<td>900</td>
-									<td>1</td>
-									<td>900</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>IT Scrum Developer</td>
-									<td>1100</td>
-									<td>1</td>
-									<td>1100</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>Total Payment</td>
-									<td></td>
-									<td></td>
-									<td>5000</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
+					<div class="ibox-content" id="dynamiccontentenrol">
+						
 
 					</div>
+					
+										
+					<div id="ajxprogress"><img src="images/ajaxprogress.gif" id="ajaxloaderid" /></div>
+					
 				</div>
 			</div>
 		</div>
@@ -174,6 +136,36 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
                 console.log(start.toISOString(), end.toISOString(), label);
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
             });
+
+
+
+			
+			$('#finalfilter').on('click',function(){
+				$('#dynamiccontentenrol').html('');
+			var mindatenew = $( ".input-mini" ).first().val();
+			var maxdatenew = $( ".input-mini" ).last().val();
+			//console.log(maxdatenew);
+
+
+			  $.ajax({
+				  method: "GET",
+				  url: "ajaxdatespanrevenue.php",
+				  beforeSend: function()
+				  {$("#ajaxloaderid").css("display", "block");
+				  },
+				  data: { mindatenew: mindatenew, maxdatenew: maxdatenew },
+				  dataType: "html",
+			    success: function(data) {
+				    $('#dynamiccontentenrol').html(data)
+				    $("#ajaxloaderid").css("display", "none");
+			      console.log(data);
+			    }
+			  });
+			  
+			});
+            
+
+            
 
         });
 

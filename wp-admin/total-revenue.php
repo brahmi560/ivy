@@ -28,6 +28,11 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					<div class="ibox-title">
 						<h5>Total Revenue (Gross)</h5>
 					</div>
+					<?php 
+			global $wpdb;
+            $results = $wpdb->get_results( 'SELECT COUNT(a.course_id) as coursecount,SUM(a.price) as coursewiseprice,c.post_title FROM wp_488a9xj6dq_gdlrpayment a  INNER JOIN wp_488a9xj6dq_posts c ON(a.course_id = c.ID) GROUP BY a.course_id  ORDER BY a.attendance DESC', OBJECT );
+            //print_r($results);
+            ?>
 					<div class="ibox-content">
 						<div class="table-responsive">
 							<table class="table table-striped">
@@ -41,47 +46,28 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								</tr>
 								</thead>
 								<tbody>
+								<?php 
+								$sno = 1;
+								$grossamount = 0;
+								foreach($results as $totalincome){
+									$grossamount = $grossamount+round($totalincome->coursewiseprice);
+									?>
 								<tr>
-									<td>1</td>
-									<td>IT Business Analyst - Practitioner</td>
-									<td>1000</td>
-									<td>1</td>
-									<td>1000</td>
+									<td><?php echo $sno;?></td>
+									<td><?php echo $totalincome->post_title;?></td>
+									<td><?php echo round($totalincome->coursewiseprice/$totalincome->coursecount);?></td>
+									<td><?php echo $totalincome->coursecount;?></td>
+									<td><?php echo round($totalincome->coursewiseprice);?></td>
 								</tr>
-								<tr>
-									<td>2</td>
-									<td>IT Business Analyst</td>
-									<td>800</td>
-									<td>1</td>
-									<td>800</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>IT Scrum Master</td>
-									<td>1200</td>
-									<td>1</td>
-									<td>1200</td>
-								</tr>
-								<tr>
-									<td>4</td>
-									<td>IT Product Owner</td>
-									<td>900</td>
-									<td>1</td>
-									<td>900</td>
-								</tr>
-								<tr>
-									<td>5</td>
-									<td>IT Scrum Developer</td>
-									<td>1100</td>
-									<td>1</td>
-									<td>1100</td>
-								</tr>
+								<?php 
+								$sno++;
+								}?>
 								<tr>
 									<td></td>
 									<td>Gross Revenue</td>
 									<td></td>
 									<td></td>
-									<td>5000</td>
+									<td><?php echo $grossamount;?></td>
 								</tr>
 								</tbody>
 							</table>
