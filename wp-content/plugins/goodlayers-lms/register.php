@@ -46,6 +46,7 @@
 				}
 				if( !empty($_POST['gender']) ){
 					update_user_meta($user_id, 'gender', esc_attr($_POST['gender']));
+					add_role( esc_attr($_POST['gender']), esc_attr($_POST['gender']));
 				}
 				if( !empty($_POST['birth_date']) ){
 					update_user_meta($user_id, 'birth-date', esc_attr($_POST['birth_date']));

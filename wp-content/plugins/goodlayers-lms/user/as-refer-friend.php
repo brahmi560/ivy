@@ -71,24 +71,26 @@ a, a:hover {
 <h3 class="gdlr-lms-admin-head" ><?php _e('Refer a Friend', 'gdlr-lms'); ?></h3>
 <div class="row">
 	<div class="col-lg-12">
-		<form class="form-horizontal">
+		<form class="form-horizontal" method="post" action="<?php echo esc_url(add_query_arg($_GET)); ?>">
+		<input type="hidden" name="redirect_to" value="<?php echo $redirect_url; ?>" />
 			<div class="form-group"><label class="col-sm-4 control-label">Your Friend Name:</label>
-				<div class="col-sm-8"><input type="text" class="form-control" required></div>
+				<div class="col-sm-8"><input type="text" class="form-control" name="friendname" required></div>
 			</div>
 			<div class="hr-line-dashed"></div>
 			<div class="form-group"><label class="col-lg-4 control-label">Email:</label>
-				<div class="col-lg-8"><input type="email" class="form-control" required></div>
+				<div class="col-lg-8"><input type="email" class="form-control" name="email" required></div>
 			</div>
 			<div class="hr-line-dashed"></div>
 			<div class="form-group"><label class="col-lg-4 control-label">Contact No.:</label>
-				<div class="col-lg-8"><input type="text" class="form-control" required></div>
+				<div class="col-lg-8"><input type="text" class="form-control" name="phone" required></div>
 			</div>
 			<div class="hr-line-dashed"></div>
 			<div class="form-group"><label class="col-lg-4 control-label">Comments:</label>
-				<div class="col-lg-8"><textarea name="address" id="address" style="width: 100%;"></textarea></div>
+				<div class="col-lg-8"><textarea name="comment" id="address" style="width: 100%;"></textarea></div>
 			</div>
 			<div>
-				<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Update</strong></button>
+			<input type="hidden" name="action" value="as-refer-friend" />
+				<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" name="submit"><strong>Update</strong></button>
 			</div>
 		</form>
 	</div>

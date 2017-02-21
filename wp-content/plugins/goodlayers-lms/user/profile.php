@@ -22,7 +22,7 @@
 		<label for="gender"><?php _e('User Role: *', 'gdlr-lms'); ?></label>
 		<span class="gdlr-lms-combobox">
 			<?php $gender = gdlr_lms_get_user_info($user_id, 'gender'); ?>
-			<select name="gender" id="gender" disabled="disabled">
+			<select name="gender" id="gender" >
 				<option value="student" <?php if(!empty($gender) && $gender == 'student') echo 'selected'; ?> ><?php _e('Aspirant', 'gdlr-lms'); ?></option>
 				<!--<option value="entreprise-partner" <?php if(!empty($gender) && $gender == 'entreprise-partner') echo 'selected'; ?> ><?php _e('Entreprise Partner', 'gdlr-lms'); ?></option>
 				<option value="independent-partner" <?php if(!empty($gender) && $gender == 'independent-partner') echo 'selected'; ?> ><?php _e('Independent Partner', 'gdlr-lms'); ?></option>
@@ -56,7 +56,8 @@
 	<p class="gdlr-lms-half-left">
 		<label>Upload Your Resume(Optional):</label>
 	<p class="gdlr-lms-half-right">
-		<button class="btn btn-sm btn-primary m-t-n-xs" type="button"><strong>Choose File</strong></button>
+	<input type="file" name="resume" style="display:none;" id="resume" />
+		<button class="btn btn-sm btn-primary m-t-n-xs"   type="button"><strong><label for="resume">Choose File</label></strong></button>
 	</p>	
 	<div class="clear"></div>
 	<!--<p class="gdlr-lms-half-left">

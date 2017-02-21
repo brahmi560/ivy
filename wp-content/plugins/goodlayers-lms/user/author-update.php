@@ -22,8 +22,10 @@
 			
 		// edit profile page
 		}else if($_POST['action'] == 'edit-profile') {
+			
 			if( empty($_POST['email']) || empty($_POST['first-name']) || empty($_POST['last-name']) || 
-				empty($_POST['gender']) || empty($_POST['birth-date']) || empty($_POST['address']) ){
+				empty($_POST['gender'])){
+				
 				$error[] = __('Please enter all required fields.', 'gdlr-lms');
 			}
 			
@@ -45,6 +47,7 @@
 				}
 				if( !empty($_POST['gender']) ){
 					update_user_meta($current_user->ID, 'gender', esc_attr($_POST['gender']));
+					add_role( esc_attr($_POST['gender']), esc_attr($_POST['gender']));
 				}
 				if( !empty($_POST['birth-date']) ){
 					update_user_meta($current_user->ID, 'birth-date', esc_attr($_POST['birth-date']));
@@ -95,6 +98,23 @@
 						update_user_meta($current_user->ID, 'author-image', $profile_image_id);
 					}
 					
+					$new_url = esc_url(add_query_arg('type', 'profile'));
+					wp_redirect($new_url, 303);
+				}
+				
+				if( !empty($_FILES['resume']['size']) ){
+					//print_r($_FILES['resume']);exit();
+					if(!function_exists( 'media_handle_upload' )){
+						require_once( ABSPATH . 'wp-admin/includes/image.php' );
+						require_once( ABSPATH . 'wp-admin/includes/file.php' );
+						require_once( ABSPATH . 'wp-admin/includes/media.php' );
+					}
+					$profile_image_id = media_handle_upload('resume', 0);
+						
+					if( !empty($profile_image_id) ){
+						update_user_meta($current_user->ID, 'resume', $profile_image_id);
+					}
+						
 					$new_url = esc_url(add_query_arg('type', 'profile'));
 					wp_redirect($new_url, 303);
 				}
@@ -184,6 +204,37 @@
 						array('%d')
 				);
 			}		
+		}
+		
+		else if($_POST['action'] == 'as-refer-friend'){
+			$data = array();
+	$data['friend_name'] = $_POST['friendname'];
+	$data['email'] = $_POST['email'];
+	$data['phone'] = $_POST['phone'];
+	$data['comments'] = $_POST['comment'];
+	$user = wp_get_current_user();
+	$data['user_id'] = $user->ID;
+	$data['created_date'] = date("Y-m-d H:i:s");
+	$table = 'wp_488a9xj6dq_refer_friend';
+	global $wpdb;
+	$frindsinfo = $wpdb->get_results('select email from wp_488a9xj6dq_refer_friend where email="'.$data['email'].'"',OBJECT);
+	
+	$friendemail = 0;
+	if(!empty($frindsinfo))
+	{
+		$friendemail = 1;
+	}
+	
+	if(email_exists($_POST['email']) ||  $friendemail == 1){
+		
+		$error[] = __('Email already exists, Please try again with new email address.', 'gdlr-lms');
+		
+	}
+	else{
+	$results = $wpdb->insert($table,$data);
+	$success[] = __('Added Friend', 'gdlr-lms');
+	
+	}
 		}
 	}
 ?>
