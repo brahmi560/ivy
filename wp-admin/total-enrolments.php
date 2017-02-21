@@ -46,8 +46,12 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 						<h5>Total Enrollments</h5>
 					</div>
 					<div class="ibox-content">
+					<?php global $wpdb;
+            $totalenroles = $wpdb->get_results( 'SELECT COUNT(*) as ttcount FROM wp_488a9xj6dq_gdlrpayment ', OBJECT );
+           
+            ?>
 						<!--<input class="form-control" type="text" name="daterange" value="01/01/2015 - 01/31/2015">-->
-						Total Enrollments as of <span></span> are 4.
+						Total Enrollments as of <span></span> are <?php echo $totalenroles[0]->ttcount;?>.
 						<br>
 						<button onclick="document.getElementById('toggle-report-range').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"><strong>Show Details</strong></button>
 						<div id="toggle-report-range"  style="display: none;">

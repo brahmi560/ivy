@@ -30,7 +30,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					</div>
 					<?php 
 			global $wpdb;
-            $results = $wpdb->get_results( 'SELECT COUNT(a.course_id) as coursecount,SUM(a.price) as coursewiseprice,c.post_title FROM wp_488a9xj6dq_gdlrpayment a  INNER JOIN wp_488a9xj6dq_posts c ON(a.course_id = c.ID) GROUP BY a.course_id  ORDER BY a.attendance DESC', OBJECT );
+            $results = $wpdb->get_results( 'SELECT COUNT(a.course_id) as coursecount,SUM(a.price) as coursewiseprice,c.post_title FROM wp_488a9xj6dq_gdlrpayment a  INNER JOIN wp_488a9xj6dq_posts c ON(a.course_id = c.ID) WHERE a.payment_status="paid" GROUP BY a.course_id  ORDER BY a.attendance DESC', OBJECT );
             //print_r($results);
             ?>
 					<div class="ibox-content">

@@ -19,7 +19,7 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 			/* $user_last_test = get_user_meta(8);
 			print_r($user_last_test); */
 			global $wpdb;
-            $results = $wpdb->get_results( 'SELECT COUNT(a.course_id) as coursecount,SUM(a.price) as coursewiseprice,c.post_title FROM wp_488a9xj6dq_gdlrpayment a  INNER JOIN wp_488a9xj6dq_posts c ON(a.course_id = c.ID) WHERE DATE(a.payment_date) BETWEEN "'.$mindate.'" AND "'.$maxdate.'" GROUP BY a.course_id  ORDER BY a.payment_date DESC', OBJECT );
+            $results = $wpdb->get_results( 'SELECT COUNT(a.course_id) as coursecount,SUM(a.price) as coursewiseprice,c.post_title FROM wp_488a9xj6dq_gdlrpayment a  INNER JOIN wp_488a9xj6dq_posts c ON(a.course_id = c.ID) WHERE DATE(a.payment_date) BETWEEN "'.$mindate.'" AND "'.$maxdate.'" AND a.payment_status="paid" GROUP BY a.course_id  ORDER BY a.payment_date DESC', OBJECT );
 			//print_r($results);
 			?>
 			
