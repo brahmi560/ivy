@@ -23,7 +23,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 	#ajaxloaderid
 	{
 	  display:none;
-	  width:20%;
+	  width:10%;
+	  margin-left: 40%;
 	}
 	#ajxprogress
 	{
