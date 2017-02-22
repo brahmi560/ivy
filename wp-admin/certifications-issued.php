@@ -19,6 +19,21 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     <link href="css\style.css" rel="stylesheet">
 
 	<link href="css\plugins\daterangepicker\daterangepicker-bs3.css" rel="stylesheet">
+	
+	<style>
+	#ajaxloaderid
+	{
+	  display:none;
+	  width:10%;
+	  margin-left: 40%;
+	}
+	#ajxprogress
+	{
+	float: left;
+    width: 100%;
+    background: #fff;
+	}
+	</style>
 </head>
 <body style="background-color: #f3f3f4 !important;">
 <div class="wrap">
@@ -62,7 +77,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								<i class="fa fa-calendar"></i>
 								<span></span> <b class="caret"></b>
 							</div>
-							<button onclick="document.getElementById('det-tot-enr').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"><strong>Submit</strong></button>
+							<button onclick="document.getElementById('det-tot-enr').style.display='block'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px;" type="button"  id="finalfilter"><strong>Submit</strong></button>
 							<button onclick="document.getElementById('det-tot-enr').style.display='none';document.getElementById('toggle-report-range').style.display='none'" class="btn btn-sm btn-primary m-t-n-xs" style="margin-top: 20px; margin-left: 10px;" type="button"><strong>Cancel</strong></button>
 						</div>
 					</div>
@@ -73,33 +88,12 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					<div class="ibox-title">
 						<h5><!--<span class="disp-mode"></span> - <span class="disp-code"></span>--> Certifications issued</h5>
 					</div>
-					<div class="ibox-content">
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-								<tr>
-									<th>#</th>
-									<th>User Name </th>
-									<th>Certification Name </th>
-									<th>Phone </th>
-									<th>Email ID </th>
-									<th>Date</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>1</td>
-									<td>Patrick Smith</td>
-									<td>IT Business Analyst - Practitioner</td>
-									<td>0800 051213</td>
-									<td>patrick@gmail.com</td>
-									<td>Jan 14, 2016</td>
-								</tr>
-								</tbody>
-							</table>
-						</div>
+					<div class="ibox-content" id="dynamiccontentenrol">
+						
 
 					</div>
+					
+					<div id="ajxprogress"><img src="images/ajaxprogress.gif" id="ajaxloaderid" /></div>
 				</div>
 			</div>
 		</div>
@@ -181,6 +175,32 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					$("#det-tot-enr .disp-code").html($(this).val());
 				});
 			});
+
+			
+			$('#finalfilter').on('click',function(){
+				$('#dynamiccontentenrol').html('');
+			var mindatenew = $( ".input-mini" ).first().val();
+			var maxdatenew = $( ".input-mini" ).last().val();
+			//console.log(maxdatenew);
+
+
+			  $.ajax({
+				  method: "GET",
+				  url: "ajaxcertificationissued.php",
+				  beforeSend: function()
+				  {$("#ajaxloaderid").css("display", "block");
+				  },
+				  data: { mindatenew: mindatenew, maxdatenew: maxdatenew },
+				  dataType: "html",
+			    success: function(data) {
+				    $('#dynamiccontentenrol').html(data)
+				    $("#ajaxloaderid").css("display", "none");
+			      console.log(data);
+			    }
+			  });
+			  
+			});
+			
 
 		});
 
