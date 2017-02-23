@@ -143,6 +143,15 @@
 		<input type="submit" class="gdlr-lms-button cyan" value="<?php _e('Update', 'gdlr-lms'); ?>" />
 	</p>		
 </form>	
+<style>
+#selectedfilenew
+{
+ position: relative;
+    float: right;
+    top: -49px;
+    left: -165px;
+}
+</style>
 <script>
 function fileSelect(){
 	document.getElementById("selectedfilenew").innerHTML = "";
