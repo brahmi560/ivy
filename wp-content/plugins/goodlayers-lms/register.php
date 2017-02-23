@@ -2,8 +2,7 @@
 	$error = array();
 	if( !empty($_POST['action']) && $_POST['action'] == 'create-new-user' ){
 		if( empty($_POST['username']) || empty($_POST['password']) || empty($_POST['re-password']) ||
-			empty($_POST['first_name']) || empty($_POST['last_name']) || empty($_POST['gender']) ||
-			empty($_POST['birth_date']) || empty($_POST['email']) || empty($_POST['address']) ){
+			empty($_POST['first_name']) || empty($_POST['last_name']) || empty($_POST['gender'])  || empty($_POST['email'])  ){
 			
 			$error[] = __('Please enter all required fields.', 'gdlr-lms');
 		}
@@ -134,25 +133,12 @@
 							</select>
 						</span>					
 					</p>
-					<p class="gdlr-lms-half-right">
-						 <label><?php _e('Birth Date *', 'gdlr-lms'); ?></label>
-						 <input type="text" name="birth_date" value="<?php echo isset($_POST['birth_date'])? $_POST['birth_date']: ''; ?>" />
-					</p>
-					<div class="clear"></div>		
+						
 					<p class="gdlr-lms-half-left">
 						<label><?php _e('Email *', 'gdlr-lms'); ?></label>
 						<input type="text" name="email" id="email" value="<?php echo isset($_POST['email'])? $_POST['email']: ''; ?>" />
 					</p>	
-					<p class="gdlr-lms-half-right">
-						<label><?php _e('Phone', 'gdlr-lms'); ?></label>
-						<input type="text" name="phone" id="phone" value="<?php echo isset($_POST['phone'])? $_POST['phone']: ''; ?>" />
-					</p>
-					<div class="clear"></div>
-					<p class="gdlr-lms-half-left">
-						<label><?php _e('Address *', 'gdlr-lms'); ?></label>
-						<textarea name="address" id="address" ><?php echo isset($_POST['address'])? esc_textarea($_POST['address']): ''; ?></textarea>
-					</p>
-					<div class="clear"></div>
+					
 <script>
 var dropdown = document.getElementById("gender");
 var roleselectvalue;

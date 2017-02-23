@@ -1,5 +1,20 @@
 <?php 
 	$user_id = $current_user->data->ID;
+	global $wpdb;
+	$resumeid = esc_attr(gdlr_lms_get_user_info($user_id, 'resume'));
+	$fileurl = '';
+	if($resumeid)
+	{
+		
+		$results = $wpdb->get_results( 'SELECT guid FROM wp_488a9xj6dq_posts WHERE ID="'.$resumeid.'"', OBJECT );
+		//print_r($results);exit();
+		if(!empty($results))
+		{
+			$fileurl = $results[0]->guid;
+			$path_parts = pathinfo($fileurl);
+			$fileextention =  $path_parts['extension'];
+		}
+	}
 ?>
 <h3 class="gdlr-lms-admin-head" ><?php _e('Edit Profile', 'gdlr-lms'); ?></h3>
 <form class="gdlr-lms-form" method="post" enctype="multipart/form-data" action="<?php echo esc_url(add_query_arg($_GET)); ?>" >
@@ -56,8 +71,8 @@
 	<p class="gdlr-lms-half-left">
 		<label>Upload Your Resume(Optional):</label>
 	<p class="gdlr-lms-half-right">
-	<input type="file" name="resume" style="display:none;" id="resume" />
-		<button class="btn btn-sm btn-primary m-t-n-xs"   type="button"><strong><label for="resume">Choose File</label></strong></button>
+	<input type="file" name="resume"  style="display:none;" onchange="fileSelect()" id="resume" />
+		<button class="btn btn-sm btn-primary m-t-n-xs"   type="button"><strong><label for="resume">Choose File</label></strong></button><div id="selectedfilenew"></div>
 	</p>	
 	<div class="clear"></div>
 	<!--<p class="gdlr-lms-half-left">
@@ -108,6 +123,33 @@
 	<?php } ?>
 	<p>
 		<input type="hidden" name="action" value="edit-profile" />
+		<?php if($fileurl != ''){?>
+		<?php if($fileextention == 'pdf'){?>
+		<a href="<?php echo $fileurl;?>" target="_blank">
+		<img src="<?php echo content_url();?>/plugins/goodlayers-lms/images/resume-pdf.png" />
+		</a>
+		<?php }?>
+		<?php if($fileextention == 'doc'){?>
+		<a href="<?php echo $fileurl;?>" target="_blank">
+		<img src="<?php echo content_url();?>/plugins/goodlayers-lms/images/resume-doc.png" />
+		</a>
+		<?php }?>
+		<?php if($fileextention == 'docx'){?>
+		<a href="<?php echo $fileurl;?>" target="_blank">
+		<img src="<?php echo content_url();?>/plugins/goodlayers-lms/images/resume-doc.png" />
+		</a>
+		<?php }?>
+		<?php } ?>
 		<input type="submit" class="gdlr-lms-button cyan" value="<?php _e('Update', 'gdlr-lms'); ?>" />
 	</p>		
 </form>	
+<script>
+function fileSelect(){
+	document.getElementById("selectedfilenew").innerHTML = "";
+	var fu1 = document.getElementById("resume");
+	var path = fu1.value;
+	var lastpath = path.lastIndexOf("\\")+1;
+	path = path.substring(lastpath);
+	document.getElementById("selectedfilenew").innerHTML = path;
+}
+</script>

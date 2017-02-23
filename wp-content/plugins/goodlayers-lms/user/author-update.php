@@ -103,7 +103,11 @@
 				}
 				
 				if( !empty($_FILES['resume']['size']) ){
-					//print_r($_FILES['resume']);exit();
+					$name = $_FILES["resume"]["name"];
+					$ext = end((explode(".", $name))); # extra () to prevent notice
+					
+					if( $ext == 'doc' || $ext == 'pdf' || $ext == 'docx' ){
+						
 					if(!function_exists( 'media_handle_upload' )){
 						require_once( ABSPATH . 'wp-admin/includes/image.php' );
 						require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -114,12 +118,18 @@
 					if( !empty($profile_image_id) ){
 						update_user_meta($current_user->ID, 'resume', $profile_image_id);
 					}
-						
-					$new_url = esc_url(add_query_arg('type', 'profile'));
-					wp_redirect($new_url, 303);
+					
+					
+					$success[] = __('Profile is updated', 'gdlr-lms');
+					
+				}
+				else {
+					
+					$error[] = __('Please upload only doc,docx,pdf file only.', 'gdlr-lms');
 				}
 				
-				$success[] = __('Profile is updated', 'gdlr-lms');
+				}
+				
 			}
 			
 		// evidence submission page
