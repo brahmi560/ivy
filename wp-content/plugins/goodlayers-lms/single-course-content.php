@@ -10,7 +10,9 @@
 		<div class="gdlr-lms-container gdlr-lms-container">
 		<?php 
 			global $current_user, $post;
-
+			global $wpdb;
+			$alreadyexistusernew = $wpdb->get_results( 'SELECT * FROM  wp_488a9xj6dq_control_panel WHERE user_id="'.$current_user->ID.'"', OBJECT );
+			if(empty($alreadyexistusernew) || ((isset($alreadyexistusernew[0]->restrict_course_meterial)) && ($alreadyexistusernew[0]->restrict_course_meterial == 0))){
 			while( have_posts() ){ the_post();
 				global $gdlr_course_content, $gdlr_course_options, $gdlr_time_left, $lms_page, $lms_lecture, $payment_row;
 				$lectures = empty($gdlr_course_content[$lms_page-1]['lecture-section'])? array(): json_decode($gdlr_course_content[$lms_page-1]['lecture-section'], true);
@@ -269,6 +271,7 @@
 				
 				echo '<div class="clear"></div>';
 				echo '</div>'; // course-single		
+			}
 			}
 		?>
 		</div><!-- gdlr-lms-container -->

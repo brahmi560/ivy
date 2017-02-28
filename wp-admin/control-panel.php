@@ -169,30 +169,71 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
         			restrictonlineexamenrol = "restrict_online_exam_enrol";
     			}
     			
-    			return false;
+    			
 
-                  if(selectedcertificate != 0){
+                  if(selecteduser != 0){
     			  $.ajax({
-    				  method: "GET",
-    				  url: "ajaxcertificationwiseenrolment.php",
-    				  beforeSend: function()
-    				  {$("#ajaxloaderid").css("display", "block");
-    				  },
-    				  data: { mindatenew: mindatenew, maxdatenew: maxdatenew,selectedcertificate: selectedcertificate },
-    				  dataType: "html",
+    				  method: "POST",
+    				  url: "ajaxcontrolpanel.php",
+    				 
+    				  data: { selecteduser: selecteduser, disableuser: disableuser,restrictcertification: restrictcertification,restrictpayment: restrictpayment,restrictcoursemeterial: restrictcoursemeterial,deleteuser: deleteuser,restrictonlineexamenrol: restrictonlineexamenrol },
+    				  dataType: "json",
     			    success: function(data) {
-    				    $('#dynamiccontentenrol').html(data)
-    				    $("#ajaxloaderid").css("display", "none");
-    			      console.log(data);
+    				    
+    			      console.log('success');
     			    }
     			  });
                   }
                   else
                   {
-                      alert('Please select certificate.');
+                      alert('Please select user.');
                   }
     			  
     			});
+
+                $('#course-name-opt-asperent').on('change',function(){
+        			var selecteduser =  $(this).val();
+        			$('#checkbox2').attr('checked', false);
+        			$('#checkbox3').attr('checked', false);
+        			$('#checkbox4').attr('checked', false);
+        			$('#checkbox5').attr('checked', false);
+        			$('#checkbox6').attr('checked', false);
+        			$('#checkbox7').attr('checked', false);
+                      if(selecteduser != 0){
+        			  $.ajax({
+        				  method: "GET",
+        				  url: "ajaxusercontrolpanel.php",
+        				 
+        				  data: { selecteduser: selecteduser },
+        				  dataType: "json",
+        			    success: function(data) {
+        				 if(data.restrict_certification == 1)
+        				 {
+        					 $('#checkbox3').attr('checked', true);
+        				 }  
+        				 if(data.restrict_payment == 1)
+        				 {
+        					 $('#checkbox4').attr('checked', true);
+        				 }  
+        				 if(data.restrict_course_meterial == 1)
+        				 {
+        					 $('#checkbox5').attr('checked', true);
+        				 }  
+        				 if(data.restrict_online_exam_enrol == 1)
+        				 {
+        					 $('#checkbox7').attr('checked', true);
+        				 }  
+        				  
+        			      
+        			    }
+        			  });
+                      }
+                      else
+                      {
+                          alert('Please select user.');
+                      }
+        			  
+        			});
 
     			
             });

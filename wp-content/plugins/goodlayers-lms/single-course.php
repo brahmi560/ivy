@@ -9,6 +9,11 @@
 	<div class="gdlr-lms-content">
 		<div class="gdlr-lms-container gdlr-lms-container">
 		<?php 
+		global $wpdb;
+		$alreadyexistusernewcrs = $wpdb->get_results( 'SELECT * FROM  wp_488a9xj6dq_control_panel WHERE user_id="'.$current_user->ID.'"', OBJECT );
+		
+		if(empty($alreadyexistusernewcrs) || ((isset($alreadyexistusernewcrs[0]->restrict_certification)) && ($alreadyexistusernewcrs[0]->restrict_certification == 0))){
+			
 			while( have_posts() ){ the_post();
 				$course_val = gdlr_lms_decode_preventslashes(get_post_meta(get_the_ID(), 'gdlr-lms-course-settings', true));
 				$course_options = empty($course_val)? array(): json_decode($course_val, true);		
@@ -119,6 +124,7 @@
 				echo '<div class="clear"></div>';
 				echo '</div>'; // course-single		
 			}
+		}
 		?>
 		</div><!-- gdlr-lms-container -->
 	</div><!-- gdlr-lms-content -->

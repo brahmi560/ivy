@@ -276,8 +276,12 @@
 	// course grid
 	function gdlr_lms_print_course_grid($query, $thumbnail, $column = 3){
 		$count = 0;
-	
+		global  $current_user;
+		global $wpdb;
+		$alreadyexistusercoursegrid = $wpdb->get_results( 'SELECT * FROM  wp_488a9xj6dq_control_panel WHERE user_id="'.$current_user->ID.'"', OBJECT );
+		
 		echo '<div class="gdlr-lms-course-grid-wrapper">';
+		if(empty($alreadyexistusercoursegrid) || ((isset($alreadyexistusercoursegrid[0]->restrict_certification)) && ($alreadyexistusercoursegrid[0]->restrict_certification == 0))){
 		while( $query->have_posts() ){ $query->the_post();
 			if($count % $column == 0){ echo '<div class="clear"></div>'; } $count++; 
 			
@@ -300,6 +304,7 @@
 			echo '<div class="clear"></div>';
 			echo '</div>'; // lms-item
 			echo '</div>'; // course-grid
+		}
 		}
 		wp_reset_postdata();
 		echo '<div class="clear"></div>';
@@ -738,24 +743,54 @@
 		}else if(in_array('book', $options) && !empty($gdlr_lms_option['payment-method']) && $gdlr_lms_option['payment-method'] == 'paypal'){
 			unset($options[array_search('book', $options)]);
 		}
-		
+		global $wpdb;
+		$alreadyexistuser = $wpdb->get_results( 'SELECT * FROM  wp_488a9xj6dq_control_panel WHERE user_id="'.$current_user->ID.'"', OBJECT );
 		foreach( $options as $value ){
 			switch($value){
 				case 'buy': 
+					if(empty($alreadyexistuser))
+					{
 					if( empty($course_options['expired-date']) || time() < strtotime($course_options['expired-date']) ){
 						echo '<a data-rel="gdlr-lms-lightbox" data-lb-open="';
 						echo empty($lightbox_open)? 'buy-form': $lightbox_open;
 						echo '" class="gdlr-lms-buy-button gdlr-lms-button cyan" >' . __('Buy Now', 'gdlr-lms') . '</a>';
 						if(empty($lightbox_open)){ gdlr_lms_purchase_lightbox_form($course_options, 'buy'); }
 					}
+					}
+					else{
+						if($alreadyexistuser[0]->restrict_payment == 0)
+						{
+							if( empty($course_options['expired-date']) || time() < strtotime($course_options['expired-date']) ){
+								echo '<a data-rel="gdlr-lms-lightbox" data-lb-open="';
+								echo empty($lightbox_open)? 'buy-form': $lightbox_open;
+								echo '" class="gdlr-lms-buy-button gdlr-lms-button cyan" >' . __('Buy Now', 'gdlr-lms') . '</a>';
+								if(empty($lightbox_open)){ gdlr_lms_purchase_lightbox_form($course_options, 'buy'); }
+							}
+						}
+						
+					}
 					break;
 
 				case 'book': 
+					if(empty($alreadyexistuser))
+					{
 					if( empty($course_options['expired-date']) || time() < strtotime($course_options['expired-date']) ){
 						echo '<a data-rel="gdlr-lms-lightbox" data-lb-open="';
 						echo empty($lightbox_open)? 'book-form': $lightbox_open;
 						echo '" class="gdlr-lms-book-button gdlr-lms-button blue" >' . __('Enroll', 'gdlr-lms') . '</a>';
 						if(empty($lightbox_open)){ gdlr_lms_purchase_lightbox_form($course_options, 'book'); }
+					}
+					}
+					else{
+						if($alreadyexistuser[0]->restrict_online_exam_enrol == 0)
+						{
+							if( empty($course_options['expired-date']) || time() < strtotime($course_options['expired-date']) ){
+								echo '<a data-rel="gdlr-lms-lightbox" data-lb-open="';
+								echo empty($lightbox_open)? 'book-form': $lightbox_open;
+								echo '" class="gdlr-lms-book-button gdlr-lms-button blue" >' . __('Enroll', 'gdlr-lms') . '</a>';
+								if(empty($lightbox_open)){ gdlr_lms_purchase_lightbox_form($course_options, 'book'); }
+							}
+						}
 					}
 					break;
 
@@ -802,6 +837,7 @@
 					break;		
 
 				case 'quiz': 
+					
 					if( !empty($course_options['quiz']) && $course_options['quiz'] != 'none' ){
 						global $current_user;
 
