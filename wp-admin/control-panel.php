@@ -141,29 +141,32 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     			var disableuser = '';
     			var restrictcertification = '';
     			var restrictpayment = '';
+    			var restrictcoursemeterial = '';
+    			var deleteuser = '';
+    			var restrictonlineexamenrol = '';
         		if($('#checkbox2').is(':checked'))
     			{
         			disableuser = "disabled_user";
     			}
-        		if($('#checkbox2').is(':checked'))
+        		if($('#checkbox3').is(':checked'))
     			{
         			restrictcertification = "restrict_certification";
     			}
-        		if($('#checkbox2').is(':checked'))
+        		if($('#checkbox4').is(':checked'))
     			{
         			restrictpayment = "restrict_payment";
     			}
-        		if($('#checkbox2').is(':checked'))
+        		if($('#checkbox5').is(':checked'))
     			{
-        			disableuser = "disabled_user";
+        			restrictcoursemeterial = "restrict_course_meterial";
     			}
-        		if($('#checkbox2').is(':checked'))
+        		if($('#checkbox6').is(':checked'))
     			{
-        			disableuser = "disabled_user";
+        			deleteuser = "delete_user";
     			}
-        		if($('#checkbox2').is(':checked'))
+        		if($('#checkbox7').is(':checked'))
     			{
-        			disableuser = "disabled_user";
+        			restrictonlineexamenrol = "restrict_online_exam_enrol";
     			}
     			
     			return false;
