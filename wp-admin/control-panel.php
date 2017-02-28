@@ -36,9 +36,18 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 							<div class="form-group"><label class="col-sm-2 control-label">Select User ID</label>
 
 								<div class="col-lg-6 col-md-6">
-									<select id="course-name-opt" class="form-control m-b" name="account">
-										<option>Select</option>
+								<?php 
+                        global $wpdb;
+                        $allasperents = $wpdb->get_results( 'SELECT ID,user_login FROM  wp_488a9xj6dq_users WHERE user_roles="student"  ORDER BY user_login ASC', OBJECT );
+                        ?>
+                         <?php if(!empty($allasperents)){?>
+									<select id="course-name-opt-asperent" class="form-control m-b" name="account">
+										<option value="0">Select</option>
+											<?php foreach ($allasperents as $aperent){?>
+											<option value="<?php echo $aperent->ID; ?>"><?php echo $aperent->user_login; ?></option>
+											<?php }?>
 									</select>
+									<?php } ?>
 								</div>
 							</div>
 							<div class="form-group">	
@@ -97,7 +106,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								</div>
 							</div>
 							<div>
-								<a href="#"><button class="btn btn-sm btn-primary m-t-n-xs" type="submit"><strong>Update</strong></button></a>
+								<a href="#"><button class="btn btn-sm btn-primary m-t-n-xs" type="button" id="finalfilter"><strong>Update</strong></button></a>
 							</div>
 						</form>
 					</div>
@@ -125,6 +134,64 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
                     checkboxClass: 'icheckbox_square-green',
                     radioClass: 'iradio_square-green',
                 });
+
+
+                $('#finalfilter').on('click',function(){
+    			var selecteduser =  $("#course-name-opt-asperent").val();
+    			var disableuser = '';
+    			var restrictcertification = '';
+    			var restrictpayment = '';
+        		if($('#checkbox2').is(':checked'))
+    			{
+        			disableuser = "disabled_user";
+    			}
+        		if($('#checkbox2').is(':checked'))
+    			{
+        			restrictcertification = "restrict_certification";
+    			}
+        		if($('#checkbox2').is(':checked'))
+    			{
+        			restrictpayment = "restrict_payment";
+    			}
+        		if($('#checkbox2').is(':checked'))
+    			{
+        			disableuser = "disabled_user";
+    			}
+        		if($('#checkbox2').is(':checked'))
+    			{
+        			disableuser = "disabled_user";
+    			}
+        		if($('#checkbox2').is(':checked'))
+    			{
+        			disableuser = "disabled_user";
+    			}
+    			
+    			return false;
+
+                  if(selectedcertificate != 0){
+    			  $.ajax({
+    				  method: "GET",
+    				  url: "ajaxcertificationwiseenrolment.php",
+    				  beforeSend: function()
+    				  {$("#ajaxloaderid").css("display", "block");
+    				  },
+    				  data: { mindatenew: mindatenew, maxdatenew: maxdatenew,selectedcertificate: selectedcertificate },
+    				  dataType: "html",
+    			    success: function(data) {
+    				    $('#dynamiccontentenrol').html(data)
+    				    $("#ajaxloaderid").css("display", "none");
+    			      console.log(data);
+    			    }
+    			  });
+                  }
+                  else
+                  {
+                      alert('Please select certificate.');
+                  }
+    			  
+    			});
+
+    			
             });
 	</script>
 </body>
