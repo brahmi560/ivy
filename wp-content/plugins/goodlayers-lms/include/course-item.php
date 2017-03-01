@@ -837,7 +837,8 @@
 					break;		
 
 				case 'quiz': 
-					
+					if(empty($alreadyexistuser))
+					{
 					if( !empty($course_options['quiz']) && $course_options['quiz'] != 'none' ){
 						global $current_user;
 
@@ -854,6 +855,30 @@
 							echo '<a class="gdlr-lms-button cyan" href="' . esc_url(add_query_arg(array('course_type'=>'quiz', 'course_page'=>1, 'retake'=>1), get_permalink())) . '" >';
 							_e('Retake final quiz', 'gdlr-lms');
 							echo '</a>';	
+						}
+					}
+					}
+					else {
+						if($alreadyexistuser[0]->restrict_online_exam_enrol == 0)
+						{
+							if( !empty($course_options['quiz']) && $course_options['quiz'] != 'none' ){
+								global $current_user;
+							
+								$quiz_status = gdlr_lms_quiz_status($course_options['quiz'], get_the_ID(), $current_user->ID);
+								if( $quiz_status == 'please-login-first' ){
+									echo '<div class="gdlr-login-for-quiz" style="padding: 0px 20px 30px">';
+									_e('You have to register and login to the site before you can take the quiz.', 'gdlr-lms');
+									echo '</div>';
+								}else if( $quiz_status == 'new-quiz' ){
+									echo '<a class="gdlr-lms-button cyan" href="' . esc_url(add_query_arg(array('course_type'=>'quiz', 'course_page'=>1), get_permalink())) . '" >';
+									_e('Take final quiz', 'gdlr-lms');
+									echo '</a>';
+								}else if( $quiz_status == 'old-quiz-retakable' ){
+									echo '<a class="gdlr-lms-button cyan" href="' . esc_url(add_query_arg(array('course_type'=>'quiz', 'course_page'=>1, 'retake'=>1), get_permalink())) . '" >';
+									_e('Retake final quiz', 'gdlr-lms');
+									echo '</a>';
+								}
+							}
 						}
 					}
 					break;

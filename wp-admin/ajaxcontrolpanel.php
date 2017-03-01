@@ -14,7 +14,7 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 
 			
 			<?php
-			
+			global $wpdb;
 			$data = array();
 	$data['user_id'] = $_POST['selecteduser'];
 	$data['restrict_certification'] = 0;
@@ -42,7 +42,27 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 	{
 		$data['restrict_online_exam_enrol'] = 1;
 	}
-	global $wpdb;
+	if($_POST['disableuser'] != '')
+	{
+		$userdata = array();
+		$userwhere = array();
+		$userwhere['ID'] = $data['user_id'];
+		$userdata['user_status'] = 1;
+		$wpdb->update('wp_488a9xj6dq_users',$userdata,$userwhere);
+	}
+	else {
+		$userdata = array();
+		$userwhere = array();
+		$userwhere['ID'] = $data['user_id'];
+		$userdata['user_status'] = 0;
+		$wpdb->update('wp_488a9xj6dq_users',$userdata,$userwhere);
+	}
+	
+	if($_POST['deleteuser'] != '')
+	{
+		wp_delete_user( $data['user_id']);
+	}
+	
 	$alreadyexistuser = $wpdb->get_results( 'SELECT * FROM  wp_488a9xj6dq_control_panel WHERE user_id="'.$data['user_id'].'"', OBJECT );
 	if(empty($alreadyexistuser))
 	{
@@ -56,7 +76,7 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 		$where['user_id'] = $data['user_id'];
         $results = $wpdb->update($table,$data,$where);
 	}
-	print_r($results);exit();
+	return print_r(json_encode($results));
 
 			
 			?>

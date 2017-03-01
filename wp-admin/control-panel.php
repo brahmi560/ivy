@@ -20,6 +20,12 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     <link href="css\style.css" rel="stylesheet">
 
     <link href="css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <style>
+    .succesmessage
+    {
+      display:none;
+    }
+    </style>
 </head>
 <body style="background-color: #f3f3f4 !important;">
 <div class="wrap">
@@ -33,9 +39,14 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 					</div>
 					<div class="ibox-content">
 						<form method="get" class="form-horizontal">
+						<div class="alert alert-success alert-dismissable succesmessage">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+    <strong>Success!</strong> This alert box could indicate a successful or positive action.
+  </div>
 							<div class="form-group"><label class="col-sm-2 control-label">Select User ID</label>
 
 								<div class="col-lg-6 col-md-6">
+								
 								<?php 
                         global $wpdb;
                         $allasperents = $wpdb->get_results( 'SELECT ID,user_login FROM  wp_488a9xj6dq_users WHERE user_roles="student"  ORDER BY user_login ASC', OBJECT );
@@ -137,6 +148,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 
 
                 $('#finalfilter').on('click',function(){
+                	$('.succesmessage').css('display','none');
     			var selecteduser =  $("#course-name-opt-asperent").val();
     			var disableuser = '';
     			var restrictcertification = '';
@@ -179,8 +191,8 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     				  data: { selecteduser: selecteduser, disableuser: disableuser,restrictcertification: restrictcertification,restrictpayment: restrictpayment,restrictcoursemeterial: restrictcoursemeterial,deleteuser: deleteuser,restrictonlineexamenrol: restrictonlineexamenrol },
     				  dataType: "json",
     			    success: function(data) {
-    				    
-    			      console.log('success');
+    				 console.log('hello');  
+    			      $('.succesmessage').show('display','block');
     			    }
     			  });
                   }
