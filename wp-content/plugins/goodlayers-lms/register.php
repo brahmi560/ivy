@@ -58,6 +58,12 @@
 				}	
 				
 				wp_new_user_notification($user_id, $_POST['password']);
+				$userdata = array();
+				$userwhere = array();
+				$userwhere['ID'] = $user_id;
+				$userdata['user_status'] = 1;
+				global $wpdb;
+				$wpdb->update('wp_488a9xj6dq_users',$userdata,$userwhere);
 				
 				$redirect_url = empty($_GET['register'])? home_url(): $_GET['register'];
 				// $redirect = esc_url(add_query_arg('login', $redirect_url, home_url())); 
