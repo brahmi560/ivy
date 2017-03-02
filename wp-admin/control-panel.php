@@ -25,6 +25,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
     {
       display:none;
     }
+    
     </style>
 </head>
 <body style="background-color: #f3f3f4 !important;">
@@ -66,7 +67,7 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 								<label class="control-label">Select actions to perform</label>
 									<fieldset>
 										<div class="checkbox checkbox-primary">
-											<input id="checkbox2" type="checkbox">
+											<input id="checkbox2" type="checkbox" >
 											<label for="checkbox2">
 												Disable Aspirant
 											</label>
@@ -205,12 +206,12 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
 
                 $('#course-name-opt-asperent').on('change',function(){
         			var selecteduser =  $(this).val();
-        			$('#checkbox2').attr('checked', false);
-        			$('#checkbox3').attr('checked', false);
-        			$('#checkbox4').attr('checked', false);
-        			$('#checkbox5').attr('checked', false);
-        			$('#checkbox6').attr('checked', false);
-        			$('#checkbox7').attr('checked', false);
+        			$('#checkbox2').prop('checked', false);
+        			$('#checkbox3').prop('checked', false);
+        			$('#checkbox4').prop('checked', false);
+        			$('#checkbox5').prop('checked', false);
+        			$('#checkbox6').prop('checked', false);
+        			$('#checkbox7').prop('checked', false);
                       if(selecteduser != 0){
         			  $.ajax({
         				  method: "GET",
@@ -221,19 +222,19 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
         			    success: function(data) {
         				 if(data.restrict_certification == 1)
         				 {
-        					 $('#checkbox3').attr('checked', true);
+        					 $('#checkbox3').prop('checked', true);
         				 }  
         				 if(data.restrict_payment == 1)
         				 {
-        					 $('#checkbox4').attr('checked', true);
+        					 $('#checkbox4').prop('checked', true);
         				 }  
         				 if(data.restrict_course_meterial == 1)
         				 {
-        					 $('#checkbox5').attr('checked', true);
+        					 $('#checkbox5').prop('checked', true);
         				 }  
         				 if(data.restrict_online_exam_enrol == 1)
         				 {
-        					 $('#checkbox7').attr('checked', true);
+        					 $('#checkbox7').prop('checked', true);
         				 }  
         				  
         			      
