@@ -12,6 +12,18 @@
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	
 	<?php 
+	    global $current_user;
+	    if($current_user->ID != '')
+	    {
+	    	$user_info = get_userdata($current_user->ID);
+	    	//echo $user_info->user_status;exit();
+	    	if($user_info->user_status != 1)
+	    	{
+	    		//echo $user_info->user_status;exit();
+	    		wp_logout();
+	    		wp_redirect(home_url().'?user_inactive=1');
+	    	}
+	    }
 		global $theme_option, $gdlr_post_option;
 		if( !empty($gdlr_post_option) ){ $gdlr_post_option = json_decode($gdlr_post_option, true); }
 		

@@ -125,6 +125,9 @@
 				echo '</div>'; // course-single		
 			}
 		}
+		else {
+			echo 'Restrict Certificate selection By Admin.';
+		}
 		?>
 		</div><!-- gdlr-lms-container -->
 	</div><!-- gdlr-lms-content -->

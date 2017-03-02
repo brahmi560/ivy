@@ -273,6 +273,9 @@
 				echo '</div>'; // course-single		
 			}
 			}
+			else {
+				echo 'Restrict Course Meterial By Admin.';
+			}
 		?>
 		</div><!-- gdlr-lms-container -->
 	</div><!-- gdlr-lms-content -->
