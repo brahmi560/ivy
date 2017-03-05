@@ -306,6 +306,9 @@
 			echo '</div>'; // course-grid
 		}
 		}
+		else {
+			echo '<div>Admin Restricted Certificate Access.</div>';
+		}
 		wp_reset_postdata();
 		echo '<div class="clear"></div>';
 		echo '</div>'; // course-grid-wrapper	
@@ -313,11 +316,17 @@
 	
 	// course grid carousel
 	function gdlr_lms_print_course_grid_carousel($query, $thumbnail, $column = 3){
+		global $current_user;
+		global $wpdb;
 		$count = 0;
 	
 		echo '<div class="gdlr-lms-course-grid-wrapper gdlr-lms-carousel">';
 		echo '<div class="flexslider" data-type="carousel" data-nav-container="course-item-wrapper" data-columns="' . $column . '" >';	
 		echo '<ul class="slides" >';	
+		$alreadyexistusercoursegridnew = $wpdb->get_results( 'SELECT * FROM  wp_488a9xj6dq_control_panel WHERE user_id="'.$current_user->ID.'"', OBJECT );
+		
+		
+		if(empty($alreadyexistusercoursegridnew) || ((isset($alreadyexistusercoursegridnew[0]->restrict_certification)) && ($alreadyexistusercoursegridnew[0]->restrict_certification == 0))){
 		while( $query->have_posts() ){ $query->the_post();
 			$course_options = gdlr_lms_get_course_options(get_the_ID());
 		
@@ -334,6 +343,10 @@
 			echo '</div>'; // course-content
 			echo '<div class="clear"></div>';
 			echo '</li>'; // course-grid
+		}
+		}
+	    else {
+			echo '<div>Admin Restricted Certificate Access.</div>';
 		}
 		wp_reset_postdata();
 		echo '</ul>';

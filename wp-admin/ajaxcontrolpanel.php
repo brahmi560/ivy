@@ -47,14 +47,14 @@ require_once( dirname( __FILE__ ) . '/admin.php' );
 		$userdata = array();
 		$userwhere = array();
 		$userwhere['ID'] = $data['user_id'];
-		$userdata['user_status'] = 1;
+		$userdata['user_status'] = 0;
 		$wpdb->update('wp_488a9xj6dq_users',$userdata,$userwhere);
 	}
 	else {
 		$userdata = array();
 		$userwhere = array();
 		$userwhere['ID'] = $data['user_id'];
-		$userdata['user_status'] = 0;
+		$userdata['user_status'] = 1;
 		$wpdb->update('wp_488a9xj6dq_users',$userdata,$userwhere);
 	}
 	

@@ -220,6 +220,10 @@ include( ABSPATH . 'wp-admin/admin-header.php' );
         				  data: { selecteduser: selecteduser },
         				  dataType: "json",
         			    success: function(data) {
+        			    if(data.restrict_usercheck == 1)
+           				 {
+           					 $('#checkbox2').prop('checked', true);
+           				 }  
         				 if(data.restrict_certification == 1)
         				 {
         					 $('#checkbox3').prop('checked', true);
